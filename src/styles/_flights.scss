@@ -1,0 +1,84 @@
+.Flights {
+    min-height: 150px;
+    margin: 60px 0 0;
+    background: #007cc2;
+
+    .FormFlights-Container {
+        width: 90%;
+        margin: 0 auto
+    }
+
+    .FormFlights-Form {
+        display: flex;
+        width: 100%;
+        margin: 0 auto;
+        flex-flow: row wrap;
+        padding: 35px 0;
+
+        .FormFlights-Form-Radio {
+            flex-basis: 175px;;
+            display: flex;
+            flex-flow: column;
+            margin-right: 15px;
+            border-right: solid 1px #FFFFFF;
+            color: #FFFFFF;
+            align-items: flex-end;
+            justify-content: space-around;
+
+            .Control-Radio {
+                display: flex;
+                width: 50%;
+            }
+        }
+        .FormFlights-Form-Control {
+            flex-basis: 70%;
+            display: flex;
+            justify-content: flex-start;
+            padding: 0 30px;
+            color: hsla(0,0%,100%,.5);
+            align-items: center;
+
+            .Form-Input {
+                display: flex;
+                flex-flow: column;
+                flex-basis: 30%;
+            }
+            input {
+                padding-left: 10px;
+                line-height: 50px;
+                height: 50px;
+                width: 100%;
+            }
+
+            select {
+                height: 50px;
+            }
+
+            .btn {
+                color: white;
+                border: none;
+                background: none;
+                border-radius: 30px;
+            }
+
+            .btn-form-search {
+                background: #0b2343;
+                width: 15%;
+                height: 50px;
+            }
+
+            .btn-form-search:hover {
+                background: #e91b2f;
+            }
+
+            .btn-change {
+                color: white;
+                border: none;
+                background: none;
+                cursor: pointer;
+            }
+        }
+    }
+
+    
+}

@@ -1,0 +1,100 @@
+.App-Header {
+    background: #0b2343;
+    color: #FFFF;
+    width: 100%;
+    min-height: 60px;
+    display: flex;
+    flex-flow: row wrap;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    .App-Header-Left {
+        flex: 1;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        font-size: 14px;
+        
+        .App-Header-Logo{
+            box-sizing: border-box;
+            padding-left: 30px;
+
+            .logo-app {
+                width: 145px;
+            }
+
+            .logo-skyteam {
+                margin-left: 8px;
+                width: 26px;
+            }
+        }
+        .App-Header-Links{
+            flex: 1;
+        }
+
+        ul {
+            display: flex;
+            justify-content: flex-start;
+            list-style: none;
+            cursor: pointer;
+
+            li {
+                margin-right: 15px;
+            }
+        }
+    }
+    
+    .App-Header-Rigth{
+        flex: 1;
+        display: flex;
+        font-size: 12px;
+        
+        .App-Header-Rigth-Links {
+            flex: 3;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            .Rigth-Links-List {
+                cursor: pointer;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-end;
+                list-style: none;
+                justify-content: space-between;
+                width: 50%;
+                margin-right: 20px;
+
+                li {
+                    align-self: center;
+                }
+
+                .btn-search {
+                    border-radius: 50%;
+                    padding: 10px;
+                    background: #007cc2;
+                    border: none;
+                }
+            }
+        }
+        .App-Header-User {
+            flex: 1 1;
+            display: flex;
+            border-left: solid 1px white;
+            align-items: center;
+
+            ul {
+                display: flex;
+                justify-content: space-around;
+                list-style: none;
+                width: 100%;
+            }
+
+            .logo-mexsvg {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+            }
+        }
+    }
+}
