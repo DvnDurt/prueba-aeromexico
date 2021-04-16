@@ -8,92 +8,156 @@
     position: fixed;
     top: 0;
     z-index: 2;
+    align-items: center;
+
     .App-Header-Left {
-        flex: 1;
         display: flex;
-        flex-flow: row wrap;
-        align-items: center;
-        font-size: 14px;
-        
-        .App-Header-Logo{
-            box-sizing: border-box;
-            padding-left: 30px;
 
-            .logo-app {
-                width: 145px;
-            }
-
-            .logo-skyteam {
-                margin-left: 8px;
-                width: 26px;
-            }
+        .logo-mobile {
+            width: 33px;
+            margin-left: 8px;
         }
-        .App-Header-Links{
-            flex: 1;
-        }
-
-        ul {
-            display: flex;
-            justify-content: flex-start;
-            list-style: none;
-            cursor: pointer;
-
-            li {
-                margin-right: 15px;
-            }
+    
+        .App-Logo {
+            margin-left: 10px;
         }
     }
-    
-    .App-Header-Rigth{
-        flex: 1;
+
+    .App-Header-Right {
         display: flex;
-        font-size: 12px;
-        
-        .App-Header-Rigth-Links {
-            flex: 3;
+
+        .Right-Links-List, .App-Header-User {
             display: flex;
-            justify-content: flex-end;
-            align-items: center;
-
-            .Rigth-Links-List {
-                cursor: pointer;
-                display: flex;
-                flex-direction: row;
-                align-items: flex-end;
-                list-style: none;
-                justify-content: space-between;
-                width: 50%;
-                margin-right: 20px;
-
-                li {
-                    align-self: center;
-                }
-
-                .btn-search {
-                    border-radius: 50%;
-                    padding: 10px;
-                    background: #007cc2;
-                    border: none;
-                }
-            }
+            list-style: none;
+            margin: 0;
+            font-size: 12px;
         }
+
         .App-Header-User {
-            flex: 1 1;
-            display: flex;
-            border-left: solid 1px white;
-            align-items: center;
-
-            ul {
-                display: flex;
-                justify-content: space-around;
-                list-style: none;
-                width: 100%;
-            }
-
+            padding: 0 10px;
+            border-left: 1px solid hsla(0,0%,100%,.25);
             .logo-mexsvg {
                 width: 30px;
                 height: 30px;
                 border-radius: 50%;
+            }
+        }
+    }
+
+    .btn-search {
+        width: 25px;
+        border-radius: 50%;
+        padding: 4px;
+        background: #007cc2;
+        border: none;
+        height: 26px;
+        color: #FFFFFF;
+    }
+    
+}
+
+@media (max-width: 679px) {
+    .App-Header-Links {
+        display: none;
+    }
+
+    .App-Header-Logo {
+        display: none;
+    }
+
+    .App-Header-Right {
+        flex: 1;
+        justify-content: flex-end;
+        margin-right: 10px;
+        .App-Icon-Question {
+            display: block;
+            border-left: 1px solid hsla(0,0%,100%,.25);
+            padding: 0 15px;
+        }
+    }
+
+    .App-Header-Right-Links {
+        display: none;
+
+    }
+
+}
+
+@media (min-width : 680px) {
+
+    .App-Icon-Question {
+        display: none;
+    }
+
+    .App-Header-Left {
+        flex-basis: 100%;
+    }
+
+    .App-Header-Mov-Logo {
+        display: none;
+    }
+    .App-Header-Logo {
+        display: flex;
+    }
+
+    .App-Header-Links {
+        display: flex;
+        flex: 1;
+        justify-content: flex-start;
+        list-style: none;
+        margin: 0;
+        align-items: center;
+        
+        li {
+            margin-right: 10px;
+        }
+    }
+
+    .logo-app {
+        width: 145px;
+    }
+
+    .logo-skyteam {
+        margin-left: 8px;
+        width: 26px;
+    }
+
+    .App-Header-Right-Links {
+        display: none;
+    }
+    
+}
+
+@media (min-width: 1200px) {
+
+    .App-Header-Left {
+        flex-basis: 50%;
+    }
+
+    .App-Header-Right {
+        
+        flex-basis: 50%;
+
+        .App-Header-Right-Links {
+            display: flex;
+            flex-basis: 100%;
+            justify-content: space-around;
+            align-items: center;
+
+            .Right-Links-List {
+                flex-basis: 70%;
+                justify-content: flex-end;
+                align-items: center;
+
+                li {
+                    margin-right: 15px;
+                }
+            }
+
+            .App-Header-User {
+                flex-basis: 30%;
+                justify-content: space-around;
+                align-items: center;
             }
         }
     }

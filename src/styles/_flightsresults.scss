@@ -1,18 +1,8 @@
 .FlightsResults {
-    width: 90%;
+    width: 95%;
     min-height: calc(100vh - 300px);
-    margin: 50px auto;
-
-    .Results {
-        display: flex;
-        justify-content: space-around;
-        border-bottom: solid 1px black;
-        list-style: none;
-    }
-    .Results-Header {
-        padding: 20px 0;
-    }
-
+    margin: 30px auto;
+    
     .Results-Content {
         font-size: 22px;
         list-style: none;
@@ -21,5 +11,21 @@
             padding: 60px 0;
             border-bottom: solid 1px black;
         }
+    }
+}
+
+@media(min-width: 680px) {
+    .Results-Header {
+        display: none;
+    }
+}
+
+@media(min-width: 1024px) {
+    .Results-Header {
+        display: flex;
+        justify-content: space-around;
+        border-bottom: solid 1px black;
+        list-style: none;
+        padding: 20px 0;
     }
 }

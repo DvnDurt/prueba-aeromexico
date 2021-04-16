@@ -2,18 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import FormFlights from './FormFlights';
 import FlightsResults from './FlightsResults';
+import { ENDPOINT, formatStat } from '../utils/utils';
 
-const ENDPOINT = {
-    busquedas: 'https://www.aeromexico.com/cms/api/v1/airports?language=es&status=1',
-    ruta: 'https://www.aeromexico.com/api/v1/checkin/flight-status?store=mx&pos=WEB&flight=&date=2021-04-15&origin=MEX&destination=ACA',
-    vuelo: 'https://www.aeromexico.com/api/v1/checkin/flight-status?store=mx&pos=WEB&flight=&date=2020-01-01&origin=MEX&destination=JFK'
-}
 const App = () => {
 
     const [airports, setAirports] = useState([])
+    const [flights, setFlights] = useState([])
 
     useEffect(() => {
-        busquedas()
+        busquedas();
     },[]);
 
     const busquedas = () => {
@@ -33,17 +30,20 @@ const App = () => {
             .catch(console.log)
     }
     
-    const dataByDestiny = () => {
-        fetch(ENDPOINT.ruta)
+    const dataByDestination = (data) => {
+        console.log(data)
+        const uri = ENDPOINT.ruta.replace('#date', data.date).replace('#origin', data.origin).replace('#destino', data.destination);
+        fetch(uri)
             .then(response => {
                 if(response.ok) return response.json()
             })
-            .then(data => {
-                console.log(data)
+            .then(({ _collection }) => {
+                console.log(_collection)
+                setFlights(_collection)
             })
             .catch(console.log)
     }
-
+    
     const dataByNumberOfFligth = () => {
         console.log('perro')
     }
@@ -51,8 +51,8 @@ const App = () => {
     return(
         <div className="App-Container">
             <Header />
-            { airports && <FormFlights airports={ airports }/> }
-            <FlightsResults />
+            { airports && <FormFlights airports={ airports } dataByDestination={ dataByDestination }/> }
+            { flights && <FlightsResults flights={ flights }/> }
         </div>
     )
 }
