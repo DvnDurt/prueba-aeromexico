@@ -1,7 +1,7 @@
 export const ENDPOINT = {
     busquedas: 'https://www.aeromexico.com/cms/api/v1/airports?language=es&status=1',
-    ruta: 'https://www.aeromexico.com/api/v1/checkin/flight-status?store=mx&pos=WEB&flight=&date=#date&origin=#origin&destination=#destino',
-    vuelo: 'https://www.aeromexico.com/api/v1/checkin/flight-status?store=mx&pos=WEB&flight=&date=2020-01-01&origin=MEX&destination=JFK'
+    ruta: 'https://www.aeromexico.com/api/v1/checkin/flight-status?store=mx&pos=WEB&flight=&date=#date&origin=#origin&destination=#destino&language=es',
+    vuelo: 'https://www.aeromexico.com/api/v1/checkin/flight-status?store=mx&pos=WEB&flight=#numflight&date=#date&origin=&destination='
 }
 
 export const getDates = () => {
@@ -12,7 +12,6 @@ export const getDates = () => {
     let pasadomanana = new Date(hoy.getTime() + (2 * DIA_EN_MILISEGUNDOS));
 
     return formatDate([hoy, manana, pasadomanana]);
-    
     
 }
 
@@ -56,7 +55,7 @@ const months = [
 ]
 
 export const formatStat = (data) => {
-    
+
     const fstatus = [
         {
             status: 'ARRIVED',
@@ -73,8 +72,32 @@ export const formatStat = (data) => {
             statusEs: 'A tiempo',
             statusStyle: 'on-time'
         },
+        {
+            status: 'FLOWN',
+            statusEs: 'En vuelo',
+            statusStyle: 'on-time'
+        },{
+            status: 'DELAYED',
+            statusEs: 'Retrasado',
+            statusStyle: 'deleyed'
+        },
+        {
+            status: null,
+            statusEs: '',
+            statusStyle: ''
+        },
+        
     ]
 
-    return fstatus.filter(stat => stat.status == data);
+    return fstatus.filter(stat => stat.status === data);
 
+}
+
+export const regEx = (dato) => {
+    
+    const valoresAceptados = /^[0-9]{0,7}$/;
+    
+    if (dato.match(valoresAceptados)) return dato;
+
+    return false;
 }

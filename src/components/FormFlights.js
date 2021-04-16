@@ -1,23 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typeahead } from 'react-bootstrap-typeahead';
-import { getDates } from '../utils/utils';
+import { getDates, regEx } from '../utils/utils';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
-const FormFlights = ({airports: airportslist, dataByDestination}) => {
+const FormFlights = ({airports: airportslist, dataByDestination, dataByNumberOfFligth}) => {
     
-    const [ selectDays, setSelectDays ] = useState(getDates());
+    const [ selectDays ] = useState(getDates());
     const [ state, setState ] = useState({
         isDestiny: true,
         isNumberFlight: false,
         isComplete: false,
         origin: [],
         destino: [],
+        numberOfFlight: '',
         date: selectDays[0].format,
     });
 
+    useEffect(() => {
+        handleInputs();
+    }, [state.origin, state.destino])
+
     const handleInputs = () => {
-        if(!state.origin.length && !state.destino.length) {
+        if(!state.origin.length || !state.destino.length) {
             setState((state) => {
                 return {
                     ...state,
@@ -26,7 +31,7 @@ const FormFlights = ({airports: airportslist, dataByDestination}) => {
             });
             
         } else {
-            console.log('entra')
+            
             setState((state) => {
                 return {
                     ...state,
@@ -49,15 +54,46 @@ const FormFlights = ({airports: airportslist, dataByDestination}) => {
 
     const handleButtonSend = (e) => {
         e.preventDefault();
-        const { cityCode:origen } = state.origin[0];
-        const { cityCode:destino } = state.destino[0];
 
-        dataByDestination({
-            date: state.date,
-            origin: origen,
-            destination: destino
-        })
+        if(state.isDestiny) {
+
+            const { cityCode:origen } = state.origin[0];
+            const { cityCode:destino } = state.destino[0];
+
+            dataByDestination({
+                date: state.date,
+                origin: origen,
+                destination: destino
+            })
+
+        } else if(state.isNumberFlight) {
         
+            dataByNumberOfFligth({
+                date: state.date,
+                numberOfFlight: state.numberOfFlight
+            })
+
+        }
+        
+    }
+
+    const handleInputNumberFlight = (e) => {
+        let value = regEx(e.target.value);
+        console.log(value)
+        if(!value) {
+            setState({
+                ...state,
+                isComplete: false
+            })
+
+            return;
+        }
+
+        setState({
+            ...state,
+            numberOfFlight: value,
+            isComplete: true
+        })
     }
 
     const handleSelect = (e) => {
@@ -110,7 +146,6 @@ const FormFlights = ({airports: airportslist, dataByDestination}) => {
                                                     origin: selected
                                                 }
                                             })
-                                            handleInputs()
                                         }}
                                         selected={state.origin}
                                     />
@@ -118,6 +153,8 @@ const FormFlights = ({airports: airportslist, dataByDestination}) => {
                                 <button 
                                     className="btn-change"
                                     onClick={handleButtonChange}
+                                    style={!state.isComplete ? { 'opacity': '.3' } : {}}
+                                    disabled={ !state.isComplete ? true : false}
                                  ><i className="fas fa-exchange-alt fa-2x"></i></button>
                                 <div>
                                     <label className="mb-10">Destino | Ver Todos</label>
@@ -136,7 +173,6 @@ const FormFlights = ({airports: airportslist, dataByDestination}) => {
                                                     destino: selected
                                                 }
                                             })
-                                            handleInputs()
                                         }}
                                         selected={state.destino}
                                     />
@@ -146,7 +182,11 @@ const FormFlights = ({airports: airportslist, dataByDestination}) => {
                             <div className={state.isNumberFlight ? '' : 'd-none'}>
                                 <label>Numero de Vuelo</label>
                                 <div>
-                                    <input type="text"/>
+                                    <input 
+                                        type="text"
+                                        onChange={handleInputNumberFlight}
+                                        value={state.numberOfFlight}
+                                    />
                                 </div>
                             </div>
                             <div>
@@ -157,8 +197,8 @@ const FormFlights = ({airports: airportslist, dataByDestination}) => {
                                         onChange={handleSelect}
                                     >
                                         {
-                                            selectDays.map( day => {
-                                                return <option value={ day.format }>{day.stringDate}</option>
+                                            selectDays.map( (day, i) => {
+                                                return <option value={ day.format } key={ i }>{day.stringDate}</option>
                                             })
                                         }
                                     </select>
@@ -168,6 +208,7 @@ const FormFlights = ({airports: airportslist, dataByDestination}) => {
                         <button 
                             className="btn btn-form-search"
                             onClick={handleButtonSend}
+                            disabled={ !state.isComplete ? true : false }
                          >Buscar</button>  
                     </div>
                 </form>

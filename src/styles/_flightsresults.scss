@@ -6,21 +6,135 @@
     .Results-Content {
         font-size: 22px;
         list-style: none;
-
+        padding: 0;
         li {
             padding: 60px 0;
             border-bottom: solid 1px black;
+            display: flex;
+            flex-direction: column;
+            align-content: flex-end;
         }
     }
+
+}
+
+.LoadingResults {
+    background: url('../assets/loading.gif') no-repeat;
+    background-size: 100%;
+    width: 50px;
+    height: 50px;
+}
+
+.No-Flights {
+    background: #007cc2;
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow-div {
+    border-bottom: 1px solid #0b2343;
+    width: 48%;
+    height: 2px;
+    align-self: center;
+    position: relative;
+
+    &:after{
+        border-radius: 50%;
+        content: " ";
+        height: 7px;
+        position: absolute;
+        top: -3px;
+        right: 0;
+        width: 7px;
+        background: #0b2343;
+    }
+
+    &:before{
+        border-radius: 50%;
+        content: " ";
+        height: 7px;
+        left: 0;
+        position: absolute;
+        top: -3px;
+        width: 7px;
+        background: #0b2343;
+    }
+}
+
+
+
+
+@media(max-width: 680px) {
+    .Results-Header {
+        display: none;
+    }
+
+    .Results-Content {
+        font-size: 12px;
+    }
+
+    .Flight-Results-L {
+        display: none;
+    }
+
+    .Flight-Results-S .Flight-Results-S-Content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        div > p {
+            font-size: 12px;
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    
+
 }
 
 @media(min-width: 680px) {
     .Results-Header {
         display: none;
     }
+
+    .Flight-Results-L {
+        display: none;
+    }
+
+    .Flight-Results-S .Flight-Results-S-Content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        div > p {
+            font-size: 12px;
+        }
+    }
+
 }
 
 @media(min-width: 1024px) {
+    .Flight-Results-S {
+        display: none;
+    }
+
+    .Flight-Results-L {
+        display: flex;
+        justify-content: space-around;
+        div {
+            flex: 1;
+            margin-left: 50px;
+            text-align: center;
+
+            p {
+                font-size: 12px;
+            }
+        }
+    }
     .Results-Header {
         display: flex;
         justify-content: space-around;

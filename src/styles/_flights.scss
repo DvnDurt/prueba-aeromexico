@@ -25,11 +25,24 @@
             }
         }
         .FormFlights-Form-Control {
-            // padding: 0 20px;
             color: hsla(0,0%,100%,.5);
 
-            .Form-Destiny > div > div > div > input {
+            .Form-Destiny > div > div > div > input, input {
                 height: 60px !important;
+                font-size: 18px;
+                line-height: 18px;
+                
+                &:focus {
+                    outline:none !important;
+                    outline-width: 0 !important;
+                    box-shadow: none;
+                    -moz-box-shadow: none;
+                    -webkit-box-shadow: none;
+                }
+            }
+
+            input {
+                width: 100%;
             }
 
             .Form-Input  {
@@ -53,10 +66,10 @@
                 margin-top: 30px;
                 min-width: 200px;
                 height: 50px;
-            }
 
-            .btn-form-search:hover {
-                background: #e91b2f;
+                &:hover {
+                    background: #e91b2f;
+                }
             }
 
             .btn-change {
@@ -142,7 +155,7 @@
         padding: 35px 0;
 
         .FormFlights-Form-Radio {
-            flex-basis: 10%;
+            flex-basis: 11%;
             display: flex;
             flex-direction: column;
             border-right: 1px solid hsla(0,0%,100%,.25);

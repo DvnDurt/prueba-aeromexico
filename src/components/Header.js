@@ -15,7 +15,7 @@ const Header2 = () => {
                         <img src={ skyteam } className="logo-skyteam" alt="logo-skyteam"/>
                     </div>
                     <div className="App-Header-Mov-Logo">
-                        <img src={ logomobile } className="logo-mobile"/>
+                        <img src={ logomobile } className="logo-mobile" alt="logo-movile"/>
                     </div>
                 </div>
                 <ul className="App-Header-Links">

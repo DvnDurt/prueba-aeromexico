@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import FormFlights from './FormFlights';
 import FlightsResults from './FlightsResults';
-import { ENDPOINT, formatStat } from '../utils/utils';
+import { ENDPOINT, } from '../utils/utils';
 
 const App = () => {
 
     const [airports, setAirports] = useState([])
-    const [flights, setFlights] = useState([])
+    const [flights, setFlights] = useState({
+        isLoading: false,
+        data: []
+    })
 
     useEffect(() => {
         busquedas();
@@ -31,28 +34,63 @@ const App = () => {
     }
     
     const dataByDestination = (data) => {
-        console.log(data)
+        setFlights({
+            ...flights,
+            isLoading:true,
+        })
         const uri = ENDPOINT.ruta.replace('#date', data.date).replace('#origin', data.origin).replace('#destino', data.destination);
         fetch(uri)
             .then(response => {
                 if(response.ok) return response.json()
             })
             .then(({ _collection }) => {
-                console.log(_collection)
-                setFlights(_collection)
+                setFlights({
+                    isLoading: false,
+                    data: _collection,
+                })
             })
             .catch(console.log)
+    
     }
     
-    const dataByNumberOfFligth = () => {
-        console.log('perro')
+    const dataByNumberOfFligth = (data) => {
+
+        setFlights({
+            ...flights,
+            isLoading:true,
+        })
+        
+        const uri = ENDPOINT.vuelo.replace('#date', data.date).replace('#numflight', data.numberOfFlight);
+
+        fetch(uri)
+            .then( response => {
+                if(response.ok) return response.json();
+            })
+            .then(({ _collection }) => {
+                setFlights({
+                    isLoading: false,
+                    data: _collection,
+                })
+            })
+            .catch(console.log)
+        
     }
     
     return(
         <div className="App-Container">
             <Header />
-            { airports && <FormFlights airports={ airports } dataByDestination={ dataByDestination }/> }
-            { flights && <FlightsResults flights={ flights }/> }
+            { airports &&  
+                <FormFlights 
+                    airports={ airports } 
+                    dataByDestination={  dataByDestination } 
+                    dataByNumberOfFligth={ dataByNumberOfFligth } 
+                />
+            }
+            { flights && 
+                <FlightsResults 
+                    data={ flights } 
+                />
+            }
         </div>
     )
 }
